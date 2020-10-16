@@ -1,6 +1,6 @@
 import JSZip from 'jszip'
 import * as fs from 'fs'
-import { basename } from 'path'
+import * as path from 'path'
 
 async function fileExists(filePath: string): Promise<boolean> {
   return new Promise((resolve, reject) => {
@@ -52,7 +52,7 @@ export async function zipFiles(
       for (const file of files) {
         console.log('add', file)
         const content = await readContent(file)
-        zip.file(basename(file), content, { binary: true })
+        zip.file(path.basename(file), content, { binary: true })
       }
       const content = await zip.generateAsync({ type: 'nodebuffer' })
       await writeContent(target, content)
