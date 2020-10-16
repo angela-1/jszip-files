@@ -10,13 +10,17 @@ import { zipFiles } from '../src/jszip-files.js'
 
 async function testParse(it, target, files, expected) {
   console.log('it', it)
-  const result = await zipFiles(target, files)
-  console.log()
-  assert.strictEqual(result, expected)
-  console.log(`\u001B[32m✓\u001B[39m ${expected}`)
+  try {
+    const result = await zipFiles(target, files)
+    assert.strictEqual(result, expected)
+    console.log(`\u001B[32m✓\u001B[39m ${expected}`)
+  } catch (error) {
+    console.error(error)
+  }
 }
 
-testParse('zip files', 'aa.zip', ['a.docx', 'b.docx'], 'aa.zip')
+// testParse('zip files', 'aa.zip', ['a.docx', 'b.docx'], 'aa.zip')
+
 testParse(
   'zip files',
   'd:/dd.zip',
